@@ -1,0 +1,82 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :texto %>
+    <%= form.text_area :texto %>
+  </div>
+
+  <div class="field">
+    <%= form.label :favs %>
+    <%= form.number_field :favs %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hashtags %>
+    <%= form.number_field :hashtags %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shares %>
+    <%= form.number_field :shares %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tags %>
+    <%= form.number_field :tags %>
+  </div>
+
+  <div class="field">
+    <%= form.label :concept %>
+    <%= form.text_field :concept %>
+  </div>
+
+  <div class="field">
+    <%= form.label :concept_score %>
+    <%= form.number_field :concept_score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keyword %>
+    <%= form.text_field :keyword %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keyword_score %>
+    <%= form.number_field :keyword_score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.text_field :category %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_score %>
+    <%= form.number_field :category_score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entity %>
+    <%= form.text_field :entity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entity_score %>
+    <%= form.number_field :entity_score %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

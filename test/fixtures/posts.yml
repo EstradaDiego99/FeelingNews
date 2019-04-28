@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  texto: MyText
+  favs: 1
+  hashtags: 1
+  shares: 1
+  tags: 1
+  concept: MyString
+  concept_score: 1
+  keyword: MyString
+  keyword_score: 1
+  category: MyString
+  category_score: 1
+  entity: MyString
+  entity_score: 1
+
+two:
+  texto: MyText
+  favs: 1
+  hashtags: 1
+  shares: 1
+  tags: 1
+  concept: MyString
+  concept_score: 1
+  keyword: MyString
+  keyword_score: 1
+  category: MyString
+  category_score: 1
+  entity: MyString
+  entity_score: 1

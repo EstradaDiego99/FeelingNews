@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Texto:</strong>
+  <%= @post.texto %>
+</p>
+
+<p>
+  <strong>Favs:</strong>
+  <%= @post.favs %>
+</p>
+
+<p>
+  <strong>Hashtags:</strong>
+  <%= @post.hashtags %>
+</p>
+
+<p>
+  <strong>Shares:</strong>
+  <%= @post.shares %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= @post.tags %>
+</p>
+
+<p>
+  <strong>Concept:</strong>
+  <%= @post.concept %>
+</p>
+
+<p>
+  <strong>Concept score:</strong>
+  <%= @post.concept_score %>
+</p>
+
+<p>
+  <strong>Keyword:</strong>
+  <%= @post.keyword %>
+</p>
+
+<p>
+  <strong>Keyword score:</strong>
+  <%= @post.keyword_score %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @post.category %>
+</p>
+
+<p>
+  <strong>Category score:</strong>
+  <%= @post.category_score %>
+</p>
+
+<p>
+  <strong>Entity:</strong>
+  <%= @post.entity %>
+</p>
+
+<p>
+  <strong>Entity score:</strong>
+  <%= @post.entity_score %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

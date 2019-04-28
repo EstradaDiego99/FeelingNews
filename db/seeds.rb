@@ -9,7 +9,6 @@
 require 'csv'
 require "json"
 require "ibm_watson/natural_language_understanding_v1"
-
 include IBMWatson
 
 natural_language_understanding = IBMWatson::NaturalLanguageUnderstandingV1.new(
@@ -18,27 +17,77 @@ natural_language_understanding = IBMWatson::NaturalLanguageUnderstandingV1.new(
   url: "https://gateway.watsonplatform.net/natural-language-understanding/api"
 )
 
-# Posts.delete_all
+language_translator = IBMWatson::LanguageTranslatorV3.new(
+  version: "2018-05-01",
+  iam_apikey: "M9EJLOm_js8OMqdMK36jesM6bt9BpBLmDEkFIkC7lQbJ",
+  url:"https://gateway.watsonplatform.net/language-translator/api"
+)
+
 route = File.join(Rails.root, 'public', 'files', 'tweets.csv')
 posts_vanilla = CSV.read(route, encoding: "ISO-8859-1:UTF-8")
 
+Posts.delete_all
+
 posts_vanilla.each do |post|
-  # puts post[6]
+
   response = natural_language_understanding.analyze(
     text: post[6],
     features: {
       categories: {limit:1},
-      concepts: {limit:3},
+      concepts: {limit:1},
       keywords: {sentiment: true, emotion: true, limit: 3},
-      entities: {sentiment: true, limit: 1}
+      entities: {sentiment: true, limit: 3}
     },
     language: "es"
-  )
+  ).result
 
-  puts response.result["concepts"]
-  puts response.result["categories"]
-  puts response.result["keywords"]
-  puts response.result["entities"]
-  puts ""
+  if response["concepts"].size!=0
+    concept = response["concepts"].first["text"]
+    concept_score = response["concepts"].first["relevance"]
+  else
+    concept = nil
+    concept_score = nil
+  end
+  if response["categories"].size!=0
+    category = response["categories"].first["label"]
+    category_score = response["categories"].first["score"]
+  else
+    category = nil
+    category_score = nil
+  end
+  keywords = response["keywords"]
+  entities = response["entities"]
+
+  begin
+    sentiment = natural_language_understanding.analyze(
+      text: post[6],
+      features: {
+        sentiment: {targets: [concept["text"]]}
+      },
+      language: "es"
+    ).result["sentiment"]["targets"].first
+  rescue
+    sentiment = nil
+  end
+
+  keywords.each do |keyword|
+    entities.each do |entity|
+      Post.create!(
+        texto: post[6],
+        favs: post[3],
+        hashtags: nil,
+        shares: nil,
+        tags: nil,
+        concept: concept,
+        concept_score: concept_score,
+        keyword: keyword["text"],
+        keyword_score: keyword["relevance"],
+        category: category,
+        category_score: category_score,
+        entity: entity["text"],
+        entity_score: entity["relevance"]
+      )
+    end
+  end
 
 end

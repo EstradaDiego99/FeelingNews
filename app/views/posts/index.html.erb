@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Texto</th>
+      <th>Favs</th>
+      <th>Hashtags</th>
+      <th>Shares</th>
+      <th>Tags</th>
+      <th>Concept</th>
+      <th>Concept score</th>
+      <th>Keyword</th>
+      <th>Keyword score</th>
+      <th>Category</th>
+      <th>Category score</th>
+      <th>Entity</th>
+      <th>Entity score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.texto %></td>
+        <td><%= post.favs %></td>
+        <td><%= post.hashtags %></td>
+        <td><%= post.shares %></td>
+        <td><%= post.tags %></td>
+        <td><%= post.concept %></td>
+        <td><%= post.concept_score %></td>
+        <td><%= post.keyword %></td>
+        <td><%= post.keyword_score %></td>
+        <td><%= post.category %></td>
+        <td><%= post.category_score %></td>
+        <td><%= post.entity %></td>
+        <td><%= post.entity_score %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>
