@@ -30,8 +30,10 @@ Posts.delete_all
 
 posts_vanilla.each do |post|
 
+  text = post[7]
+
   response = natural_language_understanding.analyze(
-    text: post[6],
+    text: text,
     features: {
       categories: {limit:1},
       concepts: {limit:1},
@@ -60,7 +62,7 @@ posts_vanilla.each do |post|
 
   begin
     sentiment = natural_language_understanding.analyze(
-      text: post[6],
+      text: text,
       features: {
         sentiment: {targets: [concept["text"]]}
       },
@@ -73,7 +75,7 @@ posts_vanilla.each do |post|
   keywords.each do |keyword|
     entities.each do |entity|
       Post.create!(
-        texto: post[6],
+        texto: text,
         favs: post[3],
         hashtags: nil,
         shares: nil,
