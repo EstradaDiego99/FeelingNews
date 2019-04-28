@@ -1,6 +1,6 @@
 class SelfController < ApplicationController
   def show
-    @posts = Post.all.group(:texto)
+    @posts = Post.all
   end
 
   def followers

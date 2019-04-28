@@ -21,6 +21,18 @@ div.row{
     border: 1px solid black;
 }
 
+h1{
+    text-align: center;
+}
+
+a button{
+    display: inline-block;
+    text-align: center;
+    color: white;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
 // Place all the styles related to the Congresses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
