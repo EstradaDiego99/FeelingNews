@@ -11,6 +11,9 @@ require "json"
 require "ibm_watson/natural_language_understanding_v1"
 include IBMWatson
 
+Post.delete_all
+Comment.delete_all
+
 natural_language_understanding = IBMWatson::NaturalLanguageUnderstandingV1.new(
   version: "2018-11-16",
   iam_apikey: "sZ3rzDvR06-X4kHsBtNqb7GUpqEQJ23Jiuf_QYMgxKAL",
@@ -30,9 +33,7 @@ posts_vanilla = CSV.read(route, encoding: "ISO-8859-1:UTF-8")
 
 posts_vanilla.each do |post|
 
-  next if post[6]=="no"
-
-  text = post[7]
+  text = post[8]
 
   response = natural_language_understanding.analyze(
     text: text,
@@ -62,12 +63,16 @@ posts_vanilla.each do |post|
   keywords = response["keywords"]
   entities = response["entities"]
 
-  keywords.each do |keyword|
-    entities.each do |entity|
-      if post[6]=="no"
+  name = 0
+  concept = ""
+
+  if post[7]=="si"
+    keywords.each do |keyword|
+      entities.each do |entity|
         parent = Post.create!(
           texto: text,
-          favs: post[3],
+          name: post[1],
+          favs: post[4],
           hashtags: nil,
           shares: nil,
           tags: nil,
@@ -80,29 +85,31 @@ posts_vanilla.each do |post|
           entity: entity["text"],
           entity_score: entity["relevance"]
         )
-      else
-        begin
-          sentiment = natural_language_understanding.analyze(
-            text: text,
-            features: {
-              sentiment: {targets: [parent.concept]}
-            },
-            language: "es"
-          ).result["sentiment"]["targets"].first
-          puts sentiment
-          sentiment = sentiment["label"]
-          sentiment_score = sentiment["score"]
-        rescue
-          sentiment = nil
-          sentiment_score = nil
-        end
-        Comment.create!(
-          texto: text,
-          favs: post[3],
-          sentiment: sentiment,
-          sentiment_score: sentiment_score
-        )
-      end
+        name = post[1]
+        concept = parent.concept
+  else
+    begin
+      sentiment = natural_language_understanding.analyze(
+        text: text,
+        features: {
+          sentiment: {targets: [concept]}
+        },
+        language: "es"
+      ).result["sentiment"]["targets"].first
+      sentiment = sentiment["label"]
+      sentiment_score = sentiment["score"]
+    rescue
+      sentiment = nil
+      sentiment_score = nil
+    end
+    Comment.create!(
+      post_id: name,
+      texto: text,
+      favs: post[4],
+      sentiment: sentiment,
+      sentiment_score: sentiment_score
+      )
+    end
     end
   end
 
