@@ -1,13 +1,13 @@
-# <h1>Self#show</h1>
-# <p>Find me in app/views/self/show.html.erb</p>
+<!-- <h1>Self#show</h1> -->
+<!-- <p>Find me in app/views/self/show.html.erb</p> -->
 
 <main id="mainMain">
     <% @posts.each do |post| %>
 
-        <section id="showSection">   
+        <section id="showSection">
             <div class="row">
                 <%= post.texto %>
-            </div>  
+            </div>
             <div class="row">
                 <%= post.favs %>
             </div>
@@ -17,17 +17,17 @@
             <div class="row">
                 <%= post.shares %>
             </div>
-            <%= if post.tags!=nil %>
+            <% if post.tags %>
                 <div class="row">
                     <%= post.tags %>
                 </div>
             <% end %>
-            <%= if post.concept!=nil %>
+            <% if post.concept %>
                 <div class="row">
                     <%= post.concept %>
                 </div>
             <% end %>
-            
+
             <div class="row">
                 <%= post.concept_score %>
             </div>
@@ -37,14 +37,14 @@
             <div class="row">
                 <%= post.keyword_score %>
             </div>
-            <%= if post.category!=nil %>
+            <% if post.category %>
                 <div class="row">
                     <%= post.category %>
                 </div>
-            <% end %>    
+            <% end %>
             <div class="row">
                 <%= post.category_score %>
-            </div>                           
+            </div>
             <div class="row">
                 <%= post.entity %>
             </div>
@@ -53,9 +53,8 @@
             </div>
             <div class="row">
                 <%= link_to 'Show', post %>
-            </div>                            
+            </div>
         </section>
 
     <% end %>
 </main>
-
