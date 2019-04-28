@@ -29,6 +29,9 @@ language_translator = IBMWatson::LanguageTranslatorV3.new(
 route = File.join(Rails.root, 'public', 'files', 'tweets.csv')
 posts_vanilla = CSV.read(route, encoding: "ISO-8859-1:UTF-8")
 
+name = 0
+concept = ""
+
 # Posts.delete_all
 
 posts_vanilla.each do |post|
@@ -39,20 +42,12 @@ posts_vanilla.each do |post|
     text: text,
     features: {
       categories: {limit:1},
-      concepts: {limit:1},
       keywords: {sentiment: true, emotion: true, limit: 3},
       entities: {sentiment: true, limit: 3}
     },
     language: "es"
   ).result
 
-  if response["concepts"].size!=0
-    concept = response["concepts"].first["text"]
-    concept_score = response["concepts"].first["relevance"]
-  else
-    concept = nil
-    concept_score = nil
-  end
   if response["categories"].size!=0
     category = response["categories"].first["label"]
     category_score = response["categories"].first["score"]
@@ -63,10 +58,21 @@ posts_vanilla.each do |post|
   keywords = response["keywords"]
   entities = response["entities"]
 
-  name = 0
-  concept = ""
-
   if post[7]=="si"
+    concepts = natural_language_understanding.analyze(
+      text: text,
+      features: {
+        concepts: {limit:1}
+      },
+      language: "es"
+    ).result["concepts"]
+    if concepts.size!=0
+      concept = concepts.first["text"]
+      concept_score = concepts.first["relevance"]
+    else
+      concept = nil
+      concept_score = nil
+    end
     keywords.each do |keyword|
       entities.each do |entity|
         parent = Post.create!(
@@ -86,7 +92,8 @@ posts_vanilla.each do |post|
           entity_score: entity["relevance"]
         )
         name = post[1]
-        concept = parent.concept
+      end
+    end
   else
     begin
       sentiment = natural_language_understanding.analyze(
@@ -109,8 +116,6 @@ posts_vanilla.each do |post|
       sentiment: sentiment,
       sentiment_score: sentiment_score
       )
-    end
-    end
   end
 
 end

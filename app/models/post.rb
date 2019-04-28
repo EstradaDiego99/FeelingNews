@@ -6,6 +6,6 @@ class Post < ApplicationRecord
     comments.each do |comment|
       sentiment += comment.sentiment_score
     end
-    return self.reflect_on_all_associations
+    return comments.size
   end
 end
