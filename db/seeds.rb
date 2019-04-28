@@ -73,6 +73,20 @@ posts_vanilla.each do |post|
       concept = nil
       concept_score = nil
     end
+    begin
+      sentiment = natural_language_understanding.analyze(
+        text: text,
+        features: {
+          sentiment: {targets: [concept]}
+        },
+        language: "es"
+      ).result["sentiment"]["targets"]
+        sentiment_score = sentiment["score"]
+        sentiment = sentiment["label"]
+    rescue
+      sentiment = nil
+      sentiment_score = nil
+    end
     keywords.each do |keyword|
       entities.each do |entity|
         parent = Post.create!(
@@ -89,32 +103,20 @@ posts_vanilla.each do |post|
           category: category,
           category_score: category_score,
           entity: entity["text"],
-          entity_score: entity["relevance"]
+          entity_score: entity["relevance"],
+          sentiment: sentiment,
+          sentiment_score: sentiment_score
         )
         name = post[1]
       end
     end
   else
-    begin
-      sentiment = natural_language_understanding.analyze(
-        text: text,
-        features: {
-          sentiment: {targets: [concept]}
-        },
-        language: "es"
-      ).result["sentiment"]["targets"].first
-      sentiment = sentiment["label"]
-      sentiment_score = sentiment["score"]
-    rescue
-      sentiment = nil
-      sentiment_score = nil
-    end
     Comment.create!(
       post_id: name,
       texto: text,
       favs: post[4],
-      sentiment: sentiment,
-      sentiment_score: sentiment_score
+      sentiment: nil,
+      sentiment_score: nil
       )
   end
 
