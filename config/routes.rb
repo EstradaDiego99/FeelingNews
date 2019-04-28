@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'calculator/display'
   get 'self/show'
   get 'self/followers'
   get 'self/statistics'
