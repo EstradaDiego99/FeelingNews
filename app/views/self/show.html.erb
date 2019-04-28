@@ -1,40 +1,26 @@
 <!-- <h1>Self#show</h1> -->
 <!-- <p>Find me in app/views/self/show.html.erb</p> -->
 
-<h1> ¿Cómo vamos?</h1> 
+<h1> ¿Cómo vamos?</h1>
 
 <main id="ButonMain">
-
     <a href="/self/show">
-        <button>
-            Menu
-        </button>
+      <button>Menu</button>
     </a>
-
-    <a href="/self/predictions">
-        <button>
-            Predicciones
-        </button>
+    <a href="/self/statistics">
+      <button>Estadísticas</button>
     </a>
-
-    <a href="/self/calculator/display">
-        <button>
-            Calculadora
-        </button>
+    <a href="/calculator/display">
+      <button>Calculadora</button>
     </a>
 </main>
-
-
-
-
-
 
 <section class="congresses-box">
   <% @posts.each do |post| %>
     <div class="congress-container">
       <div class="congress-information">
         <h3>  Tweet </h3>
-        <span id="congress-name"><%= post.texto %></span>
+        <span id="congress-name" class="tweet-text"><%= post.texto %></span>
         <% if post.category %>
           <div class="icon-text-component">
             <img src="/icons/baseline-category-24px.svg"/>
@@ -43,7 +29,7 @@
         <% end %>
         <div class="icon-text-component">
           <img src="/icons/baseline-vpn_key-24px.svg"/>
-          <span id="Lugar">KEYWORDS: <%= post.keyword %></span>
+          <span id="Lugar">PALABRAS CLAVE: <%= post.keyword %></span>
         </div>
         <div class="icon-text-component">
           <img src="/icons/baseline-contact_support-24px.svg"/>
@@ -62,16 +48,8 @@
           <span id="Lugar">No. hashtags: <%= post.hashtags %></span>
         </div>
         <div class="icon-text-component">
-          <img src="/icons/baseline-label_important-24px.svg"/>
-          <span id="Lugar">No. tags: <%= post.tags %></span>
-        </div>
-        <div class="icon-text-component">
           <img src="/icons/baseline-share-24px.svg"/>
-          <span id="Lugar">No. shares: <%= post.shares %></span>
-        </div>
-        <div class="icon-text-component">
-          <img src="/icons/baseline-share-24px.svg"/>
-          <span id="Lugar">No. shares: <%= post.shares %></span>
+          <span id="Lugar">Comentarios: <%= post.tags %></span>
         </div>
         <span><%= post.sentiment %></span>
         <span><%= post.sentiment_score %></span>

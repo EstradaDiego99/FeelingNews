@@ -1,24 +1,24 @@
 <% @posts.each do |post| %>
     <% if post.favs %>
-        @totalFav = @totalFav + 1
-        @sumaFav = @sumaFav + post.favs   
         <% if post.favs > @maxValueFav %>
             <% @maxValueFav = post.favs %>
-        <% end %>             
+        <% end %>
     <% end %>
 
     <% if post.shares %>
         @totalRt = @totalRt + 1
-        @sumaRt= @sumaRt + post.shares 
+        @sumaRt= @sumaRt + post.shares
         <% if post.shares > @maxValueRt %>
             <% @maxValueRt = post.shares %>
-        <% end %>                
+        <% end %>
     <% end %>
 <% end %>
-<% 
+<% if @totalFav!=0  %>
+<%
     @averageFav = (@sumaFav / @totalFav).to_f
     @averageRt = (@sumaRt / @totalRt).to_f
 %>
+<% end %>
 
 
 <h1 id="title">Estadisticas previas</h1>
@@ -26,39 +26,31 @@
 <main id="ButonMain">
 
     <a href="/self/show">
-        <button>
-            Menu
-        </button>
+      <button>Menu</button>
     </a>
 
-    <a href="/self/predictions">
-        <button>
-            Predicciones
-        </button>
+    <a href="/self/statistics">
+      <button>Estadísticas</button>
     </a>
 
-    <a href="/self/calculator/display">
-        <button>
-            Calculadora
-        </button>
+    <a href="/calculator/display">
+      <button>Calculadora</button>
     </a>
 </main>
 
 <img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
-<span id="Lugar">El promedio de los favs en los Tweets es: <%= @averageFav %></span>
+<span id="Lugar" class="stat-text">El promedio de los favs en los Tweets es: <%= @averageFav %></span>
 
 <br> <br> <br>
 
 <img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
-<span id="Lugar">El promedio de los retweets en la página es: <%= @averageRt %></span>
+<span id="Lugar" class="stat-text">El promedio de los retweets en la página es: <%= @averageRt %></span>
 <br> <br> <br>
 
 <img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
-<span id="Lugar">El mayor número de favs fue: <%= @maxValueFav %></span>
+<span id="Lugar" class="stat-text">El mayor número de favs fue: <%= @maxValueFav %></span>
 <br> <br> <br>
 
 <img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
-<span id="Lugar">El mayor número de retweets fue: <%= @maxValueRt %></span>
+<span id="Lugar" class="stat-text">El mayor número de retweets fue: <%= @maxValueRt %></span>
 <br> <br> <br>
-
-

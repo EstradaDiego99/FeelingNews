@@ -3,7 +3,7 @@ class CalculatorController < ApplicationController
 
     if params[:texto]&&params[:texto].size!=0
 
-      text = params[:calculator][:texto].encode("UTF-8")
+      text = params[:texto].encode("UTF-8")
 
       natural_language_understanding = IBMWatson::NaturalLanguageUnderstandingV1.new(
         version: "2018-11-16",
