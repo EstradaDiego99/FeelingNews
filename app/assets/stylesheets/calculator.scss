@@ -21,10 +21,6 @@ section {
 	position: relative;
 }
 
-.text-input {
-	display: block;
-}
-
 #btn_sentimiento{
 	position: absolute;
 	right: 80px;
@@ -72,14 +68,29 @@ button, #submit{
   	border-radius: 50px 20px;
 }
 
+form {
+	align-items: center;
+}
+
 .text-input {
+	margin: 0 auto;
 	background-color: #00000000;
 	font-family: 'Montserrat';
 	font-size: 24px;
+	width: 450px;
+	height: 150px;
+	display: block;
+	border-radius: 16px;
+	border-color: #437184;
+	border-width: 8px;
+	rows: 4;
 }
 
 .big-button-component {
   height: 64px;
+	min-width: 256px;
+	font-family: 'Montserrat';
+	margin: 0 auto;
   background-color: #1ad685;
   margin: 0.5em;
   border-radius: 1em;

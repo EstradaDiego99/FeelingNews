@@ -1,16 +1,22 @@
 <h1 id="calculadora-title">Calculadora de impacto</h1>
 <!--<p>Find me in app/views/calculator/display.html.erb</p>-->
-<textarea class="text-input" placeholder="Escribe tu Tweet" id="to-calculate" ></textarea>
 
-<div class="big-button-component" id="btn-buscar-congresos" onclick="toCongresses()">
-	<span>Calcular Contenido</span>
-</div>
+<form action = "/calculator/display" >
+  <input type="textarea" name="texto" id="to-calculate" class="text-input" 	>
+  <input type="submit" class="big-button-component" id="btn-buscar-congresos"/>
+</form>
+<%= form_for :calculator do |f| %>
+	<%= f.text_field :texto  %>
+<% end %>
 
 <section id="reporte">
 	<div id="rep-sentimientos">
-		<%= calcularSentimientos(texto) %>
+		<span><%= @sentiment %></span>
 	</div>
 	<div id="rep-conceptos">
-		<%= calcularSentimientos(texto) %>
+		<span><%= @keyword %></span>
+	</div>
+	<div id="rep-conceptos">
+		<span><%= @entity %></span>
 	</div>
 </section>
