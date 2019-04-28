@@ -1,60 +1,22 @@
 <!-- <h1>Self#show</h1> -->
 <!-- <p>Find me in app/views/self/show.html.erb</p> -->
 
-<main id="mainMain">
-    <% @posts.each do |post| %>
-
-        <section id="showSection">
-            <div class="row">
-                <%= post.texto %>
-            </div>
-            <div class="row">
-                <%= post.favs %>
-            </div>
-            <div class="row">
-                <%= post.hashtags %>
-            </div>
-            <div class="row">
-                <%= post.shares %>
-            </div>
-            <% if post.tags %>
-                <div class="row">
-                    <%= post.tags %>
-                </div>
-            <% end %>
-            <% if post.concept %>
-                <div class="row">
-                    <%= post.concept %>
-                </div>
-            <% end %>
-
-            <div class="row">
-                <%= post.concept_score %>
-            </div>
-            <div class="row">
-                <%= post.keyword %>
-            </div>
-            <div class="row">
-                <%= post.keyword_score %>
-            </div>
-            <% if post.category %>
-                <div class="row">
-                    <%= post.category %>
-                </div>
-            <% end %>
-            <div class="row">
-                <%= post.category_score %>
-            </div>
-            <div class="row">
-                <%= post.entity %>
-            </div>
-            <div class="row">
-                <%= post.entity_score %>
-            </div>
-            <div class="row">
-                <%= link_to 'Show', post %>
-            </div>
-        </section>
-
-    <% end %>
-</main>
+<section class="congresses-box">
+  <% @posts.each do |post| %>
+    <div class="congress-container">
+      <div class="congress-information">
+        <span id="congress-name"><%= post.texto %></span>
+        <% if post.category %>
+          <div class="icon-text-component">
+            <img src="/icons/baseline-label_important-24px.svg"/>
+            <span id="Fecha"><%= post.category %></span>
+          </div>
+        <% end %>
+        <div class="icon-text-component">
+          <img src="/icons/baseline-label_important-24px.svg"/>
+          <span id="Lugar"><%= post.keyword %></span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>

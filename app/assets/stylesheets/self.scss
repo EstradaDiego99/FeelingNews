@@ -14,9 +14,557 @@ main#mainMain{
 section#showSection{
     max-width: 400px;
     float: left;
-    margin: 30px; 
+    margin: 30px;
 }
 div.row{
     background-color: #ff661a;
     border: 1px solid black;
+}
+
+// Place all the styles related to the Congresses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@font-face {
+  font-family: "Slabo Regular";
+  src: url(/assets/Slabo27px-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url(/assets/Ubuntu-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway/Raleway-Regular.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/Lato/Lato-Regular.ttf') format("truetype");
+}
+
+@mixin icon-text-component ($font-size) {
+  font-size: $font-size;
+  display: flex;
+  align-items: flex-start;
+  img {
+    width: $font-size;
+    height: $font-size;
+    min-height: $font-size;
+    min-width: $font-size;
+    margin-right: 0.3em;
+  }
+  span {
+    font-size: $font-size;
+  }
+}
+@mixin date-component ($width, $color, $background-color) {
+  background-color: $background-color;
+  font-size: $width/3;
+  font-weight: bold;
+  font-family: "Ubuntu";
+  width: $width;
+  height: $width;
+  color: $color;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@mixin field-component ($font-size, $width) {
+  font-family: 'Lato';
+  font-size: $font-size;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  width: $width;
+  display: flex;
+
+  span {
+    width: $width/4;
+    text-align: right;
+    margin-right: 16px;
+  }
+
+  input, textarea {
+    background-color: #0000000f;
+    border-color: #000000;
+    border-width: 0px;
+    border-bottom-width: 3px;
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  input {
+    font-size: $font-size;
+  }
+
+  input[type=checkbox] {
+    width: 24px;
+    height: 24px;
+  }
+
+  #congress_name {
+
+  }
+
+  #congress_url_website, #congress_url_image, #congress_url_cover {
+    font-size: $font-size*3/4;
+  }
+
+  textarea {
+    font-size: $font-size*3/4;
+  }
+
+  #congress_international {
+
+  }
+}
+
+#notice {
+  text-align: center;
+  font-family: Ubuntu-Regular;
+  background-color: #00000040;
+  font-size: 24px;
+  padding: 0.4em;
+}
+
+.destroy-component {
+  margin: 0 auto;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddbebb;
+  border: thick solid #ff4000;
+  border-radius: 10px;
+  font-family: 'Raleway';
+  height: 64px;
+  width: 256px;
+  cursor: pointer;
+
+  a {
+    color: #ff4000;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Raleway';
+  }
+}
+
+.filler {
+  flex-grow: 100;
+}
+
+.congresses{
+  width: auto;
+  a {
+    padding: 0.354em 0.5em;
+    border-radius: 0.354em;
+  }
+}
+
+.congresses-box {
+  display: block;
+  margin-top: 48px;
+  margin: 0 auto;
+}
+
+.congress-container {
+
+  font-size: 24px;
+  font-family: "Ubuntu";
+  margin: 0 auto 1em auto;
+  display: flex;
+  border-style: solid;
+  border-radius: 0.3em;
+  border-width: thick;
+  height: 150px;
+  width: 600px;
+
+  img {
+    height: 150px;
+    width: 150px;
+  }
+
+  .congress-information {
+    width: min-content;
+    flex-grow: 1;
+    padding: 0.2em 0.5em;
+    display: block;
+
+    #congress-name {
+      display: flex;
+      height: inherit;
+      flex-grow: 1;
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 0.1em;
+      height: 5em;
+      margin: 0;
+    }
+
+    .icon-text-component {
+      @include icon-text-component(18px);
+    }
+  }
+
+  .date-component {
+    @include date-component(150px,#ffffff,#000000);
+  }
+}
+
+.title-header {
+  min-width: 300px;
+  margin: 24px 12px;
+  @include icon-text-component(64px);
+  align-items: center;
+  color: #271056;
+  font-family: Raleway;
+  font-weight: bold;
+  position: relative;
+
+  span {
+    position: absolute;
+    width: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  a {
+    width: 64px;
+    height: 64px;
+  }
+
+  img {
+    margin: 0px;
+  }
+}
+
+#congress-name {
+  color: #2c1063;
+  text-align: left;
+  font-size: 24px;
+  font-family: Raleway;
+  font-weight: bold;
+  margin: 24px 0 24px 0;
+}
+
+.international-congress {
+  background-color: #1ad685;
+  border-color: #62ad39;
+}
+
+.national-congress {
+  background-color: #c1c0e4;
+  border-color: #443cad;
+}
+
+.congress-show {
+  span {
+  }
+}
+
+.congress-description {
+  font-size: 30px;
+}
+
+.congress-image-show {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+}
+
+.congress-container:hover {
+  cursor: pointer;
+}
+
+.congress-cover {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+
+  img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+  }
+}
+
+#cover-component {
+  min-height: 48px;
+
+  #return-congress-list {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+  }
+}
+
+.main-title-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  color: #2c1063;
+  font-family: Raleway;
+  font-weight: bold;
+  margin: 16px;
+  font-size: 36px;
+
+  img{
+    width: 36px;
+    height: 36px;
+    margin-right: 16px;
+  }
+
+  p {
+    width: 100%;
+  }
+}
+
+#congress-info-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  margin-top: 32px;
+  max-width: 1200px;
+  font-family: 'Lato';
+
+  #information-container {
+    min-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 64px;
+    padding: 16px;
+    width: 400px;
+
+    .tag-container {
+      @include icon-text-component(32px);
+      margin-bottom: 32px;
+    }
+
+    .congress-description {
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+
+    .icon-text-component {
+      @include icon-text-component(32px);
+      margin-bottom: 32px;
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    #dates-container {
+      display: flex;
+      justify-content: space-between;
+
+      .date-component {
+        @include date-component(150px,#ffffff,#000000);
+        margin: 4px;
+      }
+
+      img {
+        width: 64px;
+      }
+    }
+
+  }
+
+  #register-container {
+    min-width: 300px;
+    width: 400px;
+    padding: 16px;
+    margin: 0 auto;
+
+    #label-fechas {
+      font-size: 30px;
+    }
+
+    #big-deadline-component {
+        max-width: 300px;
+        margin: 0 auto;
+
+        .date-component {
+          @include date-component(300px, #000000, #00000000);
+        }
+    }
+
+    #btn-to-website {
+      width: 95%;
+    }
+  }
+}
+
+#new-congress-form {
+  font-family: 'Lato';
+  font-size: 24px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  width: 450px;
+  display: flex;
+  justify-content: flex-start;
+  border-collapse: separate;
+  border-spacing: 16px;
+
+  .label-container {
+    text-align: right;
+  }
+
+  .field-container {
+    text-align: left;
+
+    input {
+      background-color: #0000000f;
+      border-color: #000000;
+      border-width: 0px;
+      border-bottom-width: 3px;
+      font-size: 24px;
+    }
+
+    textarea {
+      background-color: #0000000f;
+      border-color: #000000;
+      border-width: 0px;
+      border-bottom-width: 3px;
+      font-size: 15px;
+    }
+  }
+}
+
+.field-component {
+  @include field-component(24px,600px);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+
+  input[type=submit] {
+    margin: 0 auto;
+    background-color: #bbbddd;
+    border-radius: 10px;
+    border-color: #271056;
+    border-width: thick;
+    font-size: 24px;
+    font-weight: bold;
+    color: #271056;
+    font-family: 'Raleway';
+    height: 64px;
+    width: 256px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 700px){
+
+  .main-title {
+    font-size: 48px;
+  }
+
+  .congress-container {
+
+    font-size: 15px;
+    border-radius: 0.3em;
+    height: 100px;
+    width: 300px;
+
+    .congreso-imagen {
+      display: none;
+    }
+
+    .congress-information {
+
+      #congress-name {
+        font-size: 12px;
+        padding-bottom: 0.5em;
+      }
+
+      .icon-text-component {
+        @include icon-text-component(12px);
+      }
+    }
+
+    .date-component {
+      font-size: 32px;
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .title-header {
+    @include icon-text-component(48px);
+    align-items: center;
+    height: 96px;
+
+    a {
+      width: 48px;
+      height: 48px;
+    }
+
+    img {
+      margin: 0px;
+    }
+  }
+
+  .field-component {
+    @include field-component(24px,400px);
+    display: block;
+
+    input, textarea {
+      width: 400px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px){
+
+  #cover-component {
+    min-width: 300px;
+  }
+
+  .show-main-title {
+    font-size: 30px;
+  }
+
+  #congress-info-container {
+    max-width: 300px;
+
+    #information-container {
+      width: 350px;
+
+      .icon-text-component {
+        @include icon-text-component(24px);
+      }
+
+      #dates-container {
+        .date-component {
+          @include date-component(120px,#ffffff,#000000);
+        }
+      }
+    }
+
+    #register-container {
+      max-width: 300px;
+    }
+  }
+
+  .title-header {
+    margin: 12px;
+    span {
+      font-size: 32px;
+    }
+  }
+
+  .field-component {
+    @include field-component(18px,300px);
+    display: block;
+
+    input, textarea {
+      width: 300px;
+    }
+  }
 }
