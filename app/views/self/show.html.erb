@@ -1,52 +1,61 @@
 # <h1>Self#show</h1>
 # <p>Find me in app/views/self/show.html.erb</p>
 
+<main id="mainMain">
+    <% @posts.each do |post| %>
 
-<% @posts.each do |post| %>
+        <section id="showSection">   
+            <div class="row">
+                <%= post.texto %>
+            </div>  
+            <div class="row">
+                <%= post.favs %>
+            </div>
+            <div class="row">
+                <%= post.hashtags %>
+            </div>
+            <div class="row">
+                <%= post.shares %>
+            </div>
+            <%= if post.tags!=nil %>
+                <div class="row">
+                    <%= post.tags %>
+                </div>
+            <% end %>
+            <%= if post.concept!=nil %>
+                <div class="row">
+                    <%= post.concept %>
+                </div>
+            <% end %>
+            
+            <div class="row">
+                <%= post.concept_score %>
+            </div>
+            <div class="row">
+                <%= post.keyword %>
+            </div>
+            <div class="row">
+                <%= post.keyword_score %>
+            </div>
+            <%= if post.category!=nil %>
+                <div class="row">
+                    <%= post.category %>
+                </div>
+            <% end %>    
+            <div class="row">
+                <%= post.category_score %>
+            </div>                           
+            <div class="row">
+                <%= post.entity %>
+            </div>
+            <div class="row">
+                <%= post.entity_score %>
+            </div>
+            <div class="row">
+                <%= link_to 'Show', post %>
+            </div>                            
+        </section>
 
-    <section id="showSection">   
-        <div class="row">
-            <%= post.texto %>
-        </div>  
-        <div class="row">
-            <%= post.favs %>
-        </div>
-        <div class="row">
-            <%= post.hashtags %>
-        </div>
-        <div class="row">
-            <%= post.shares %>
-        </div>
-        <div class="row">
-            <%= post.tags %>
-        </div>
-        <div class="row">
-            <%= post.concept %>
-        </div>
-        <div class="row">
-            <%= post.concept_score %>
-        </div>
-        <div class="row">
-            <%= post.keyword %>
-        </div>
-        <div class="row">
-            <%= post.keyword_score %>
-        </div>
-        <div class="row">
-            <%= post.category %>
-        </div>     
-        <div class="row">
-            <%= post.category_score %>
-        </div>                           
-        <div class="row">
-            <%= post.entity %>
-        </div>
-        <div class="row">
-            <%= post.entity_score %>
-        </div>
-        <div class="row">
-            <%= link_to 'Show', post %>
-        </div>                            
-    </section>
+    <% end %>
+</main>
 
-  <% end %>

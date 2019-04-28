@@ -3,12 +3,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body{
-    background-color: #248f24;
+    background-color:  	#00bfff;
     color: black;
+    position: relative;
+}
+main#mainMain{
+    max-width: 85%;
+    margin: 0 auto;
 }
 section#showSection{
     max-width: 400px;
+    float: left;
+    margin: 30px; 
 }
 div.row{
-    border: 2px solid black;
+    background-color: #ff661a;
+    border: 1px solid black;
 }
