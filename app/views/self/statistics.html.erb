@@ -1,26 +1,3 @@
-<h1>Estadisticas previas</h1>
-<!--<p>Find me in app/views/self/statistics.html.erb</p>-->
-<h2>Favoritos promedio</h2>
-<p>
-    <%= @averageFav %>
-</p>
-
-<h2>Retweets promedio</h2>
-<p>
-    <%= @averageRt %>
-</p>
-
-<h2>Tweet con mayor favoritos</h2>
-<p>
-    <%= @maxValueFav %>
-</p>
-
-<h2>Tweet con mayor retweets</h2>
-
-<p>
-    <%= @maxValueRt %>
-</p>
-
 <% @posts.each do |post| %>
     <% if post.favs %>
         @totalFav = @totalFav + 1
@@ -43,5 +20,45 @@
     @averageRt = (@sumaRt / @totalRt).to_f
 %>
 
+
+<h1 id="title">Estadisticas previas</h1>
+
+<main id="ButonMain">
+
+    <a href="/self/show">
+        <button>
+            Menu
+        </button>
+    </a>
+
+    <a href="/self/predictions">
+        <button>
+            Predicciones
+        </button>
+    </a>
+
+    <a href="/self/calculator/display">
+        <button>
+            Calculadora
+        </button>
+    </a>
+</main>
+
+<img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
+<span id="Lugar">El promedio de los favs en los Tweets es: <%= @averageFav %></span>
+
+<br> <br> <br>
+
+<img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
+<span id="Lugar">El promedio de los retweets en la página es: <%= @averageRt %></span>
+<br> <br> <br>
+
+<img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
+<span id="Lugar">El mayor número de favs fue: <%= @maxValueFav %></span>
+<br> <br> <br>
+
+<img src="/icons/baseline-radio_button_unchecked-24px.svg"/>
+<span id="Lugar">El mayor número de retweets fue: <%= @maxValueRt %></span>
+<br> <br> <br>
 
 
