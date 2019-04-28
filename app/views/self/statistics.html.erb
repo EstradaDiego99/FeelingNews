@@ -1,9 +1,47 @@
 <h1>Estadisticas previas</h1>
 <!--<p>Find me in app/views/self/statistics.html.erb</p>-->
 <h2>Favoritos promedio</h2>
+<p>
+    <%= @averageFav %>
+</p>
 
 <h2>Retweets promedio</h2>
+<p>
+    <%= @averageRt %>
+</p>
 
 <h2>Tweet con mayor favoritos</h2>
+<p>
+    <%= @maxValueFav %>
+</p>
 
 <h2>Tweet con mayor retweets</h2>
+
+<p>
+    <%= @maxValueRt %>
+</p>
+
+<% @posts.each do |post| %>
+    <% if post.favs %>
+        @totalFav = @totalFav + 1
+        @sumaFav = @sumaFav + post.favs   
+        <% if post.favs > @maxValueFav %>
+            <% @maxValueFav = post.favs %>
+        <% end %>             
+    <% end %>
+
+    <% if post.shares %>
+        @totalRt = @totalRt + 1
+        @sumaRt= @sumaRt + post.shares 
+        <% if post.shares > @maxValueRt %>
+            <% @maxValueRt = post.shares %>
+        <% end %>                
+    <% end %>
+<% end %>
+<% 
+    @averageFav = (@sumaFav / @totalFav).to_f
+    @averageRt = (@sumaRt / @totalRt).to_f
+%>
+
+
+
