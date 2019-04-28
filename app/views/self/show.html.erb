@@ -5,16 +5,41 @@
   <% @posts.each do |post| %>
     <div class="congress-container">
       <div class="congress-information">
+        <h3>  Tweet </h3>
         <span id="congress-name"><%= post.texto %></span>
         <% if post.category %>
           <div class="icon-text-component">
             <img src="/icons/baseline-label_important-24px.svg"/>
-            <span id="Fecha"><%= post.category %></span>
+            <span id="Fecha">CATEGORÍA: <%= post.category %></span>
           </div>
         <% end %>
         <div class="icon-text-component">
           <img src="/icons/baseline-label_important-24px.svg"/>
-          <span id="Lugar"><%= post.keyword %></span>
+          <span id="Lugar">KEYWORDS: <%= post.keyword %></span>
+        </div>
+        <div class="icon-text-component">
+          <img src="/icons/baseline-label_important-24px.svg"/>
+          <span id="Lugar">CONCEPT: <%= post.concept %></span>
+        </div>.
+        <div class="icon-text-component">
+          <img src="/icons/baseline-label_important-24px.svg"/>
+          <span id="Lugar">ENTITY: <%= post.entity %></span>
+        </div>
+        <div class="icon-text-component">
+          <img src="/icons/baseline-label_important-24px.svg"/>
+          <span id="Lugar">No. favs: <%= post.favs %></span>
+        </div>
+        <div class="icon-text-component">
+          <img src="/icons/baseline-label_important-24px.svg"/>
+          <span id="Lugar">No. hashtags: <%= post.hashtags %></span>
+        </div>
+        <div class="icon-text-component">
+          <img src="/icons/baseline-label_important-24px.svg"/>
+          <span id="Lugar">No. tags: <%= post.tags %></span>
+        </div>
+        <div class="icon-text-component">
+          <img src="/icons/baseline-label_important-24px.svg"/>
+          <span id="Lugar">No. shares: <%= post.shares %></span>
         </div>
       </div>
     </div>
