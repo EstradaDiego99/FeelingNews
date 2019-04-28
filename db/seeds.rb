@@ -30,6 +30,8 @@ Posts.delete_all
 
 posts_vanilla.each do |post|
 
+  next if post[6]=="no"
+
   text = post[7]
 
   response = natural_language_understanding.analyze(
@@ -62,28 +64,7 @@ posts_vanilla.each do |post|
 
   keywords.each do |keyword|
     entities.each do |entity|
-      if post[6]=="si"
-        parent = Post.find(params[:text])
-        begin
-          sentiment = natural_language_understanding.analyze(
-            text: text,
-            features: {
-              sentiment: {targets: [parent.concept]}
-            },
-            language: "es"
-          ).result["sentiment"]["targets"].first
-          puts sentiment
-        rescue
-          sentiment = nil
-        end
-        Comment.create!(
-          post_id: parent.id,
-          texto: text,
-          favs: post[3],
-          sentiment: sentiment["label"],
-          sentiment_score: sentiment["score"]
-        )
-      else
+      if post[6]=="no"
         Post.create!(
           texto: text,
           favs: post[3],
@@ -102,5 +83,33 @@ posts_vanilla.each do |post|
       end
     end
   end
+
+end
+
+posts_vanilla.each do |post|
+
+  next if post[6]=="si"
+
+  text = post[7]
+
+  begin
+    sentiment = natural_language_understanding.analyze(
+      text: text,
+      features: {
+        sentiment: {targets: [parent.concept]}
+      },
+      language: "es"
+    ).result["sentiment"]["targets"].first
+    puts sentiment
+  rescue
+    sentiment = nil
+  end
+
+  Comment.create!(
+    texto: text,
+    favs: post[3],
+    sentiment: sentiment["label"],
+    sentiment_score: sentiment["score"]
+  )
 
 end

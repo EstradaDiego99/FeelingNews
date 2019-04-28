@@ -6,5 +6,6 @@ class Post < ApplicationRecord
     comments.each do |comment|
       sentiment += comment.sentiment_score
     end
+    return sentiment
   end
 end
