@@ -1,27 +1,42 @@
 // Place all the styles related to the Calculator controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@font-face {
+  font-family: "Montserrat";
+  src: url(/fonts/Montserrat-Regular.ttf) format("truetype");
+}
+
+#calculadora-title {
+	font-size: 50px;
+	color: white;
+	font-family: 'Ubuntu';
+	line-height: initial;
+}
 
 body {
 	background-color: #288fb4;
 }
 
 section {
-	position: relative; 
+	position: relative;
+}
+
+.text-input {
+	display: block;
 }
 
 #btn_sentimiento{
 	position: absolute;
 	right: 80px;
 	top: 5px;
-	width: 150px; 
+	width: 150px;
 	height: 40px;
 }
 #btn_concepto{
 	position: absolute;
 	right: 80px;
 	top: 80px;
-	width: 150px; 
+	width: 150px;
 	height: 40px;
 }
 
@@ -29,27 +44,71 @@ section {
 	position: absolute;
 	left: 20px;
 	top: 170px;
-	width: 150px; 
+	width: 150px;
 	height: 40px;
 }
 
 textarea{
-	margin: 0px; 
-	left: 20px; 
-	height: 140px; 
-	width: 1055px;
+	margin: 0px;
+	min-height: 200px;
+	width: 600px;
 	resize: none;
+	border-color: #396a7d;
+	border-radius: 16px;
+	border-width: 8px;
 }
+
 #reporte{
 	top: 80px;
 }
 
 h1, h2{
-	color: #efddb2; 
+	color: #efddb2;
 }
 
 button, #submit{
 	background-color: #fa360a;
 	border: 2px solid #fa360a;
   	border-radius: 50px 20px;
+}
+
+.text-input {
+	background-color: #00000000;
+	font-family: 'Montserrat';
+	font-size: 24px;
+}
+
+.big-button-component {
+  height: 64px;
+  background-color: #1ad685;
+  margin: 0.5em;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 30px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 600;
+    margin: auto auto;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    margin: 0 8px;
+  }
+}
+
+.big-button-component:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px){
+	#to-calculate {
+		width: 300px;
+		margin: 0 auto;
+	}
 }
