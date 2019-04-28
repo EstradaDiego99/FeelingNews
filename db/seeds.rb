@@ -42,8 +42,8 @@ posts_vanilla.each do |post|
     text: text,
     features: {
       categories: {limit:1},
-      keywords: {sentiment: true, emotion: true, limit: 3},
-      entities: {sentiment: true, limit: 3}
+      keywords: {sentiment: true, emotion: true, limit: 1},
+      entities: {sentiment: true, limit: 1}
     },
     language: "es"
   ).result
@@ -87,29 +87,35 @@ posts_vanilla.each do |post|
       sentiment = nil
       sentiment_score = nil
     end
-    keywords.each do |keyword|
-      entities.each do |entity|
-        parent = Post.create!(
-          texto: text,
-          name: post[1],
-          favs: post[4],
-          hashtags: nil,
-          shares: nil,
-          tags: nil,
-          concept: concept,
-          concept_score: concept_score,
-          keyword: keyword["text"],
-          keyword_score: keyword["relevance"],
-          category: category,
-          category_score: category_score,
-          entity: entity["text"],
-          entity_score: entity["relevance"],
-          sentiment: sentiment,
-          sentiment_score: sentiment_score
-        )
-        name = post[1]
-      end
+    entity = entities.first
+    if entity
+      entity_score = entity["relevance"]
+      entity = entity["text"]
+    else
+      entity  = nil
+      entity_score = nil
     end
+    keyword = keywords.first["text"]
+    keyword_score = keywords.first["relevance"]
+    parent = Post.create!(
+      texto: text,
+      name: post[1],
+      favs: post[4],
+      hashtags: nil,
+      shares: nil,
+      tags: nil,
+      concept: concept,
+      concept_score: concept_score,
+      keyword: keyword,
+      keyword_score: keyword_score,
+      category: category,
+      category_score: category_score,
+      entity: entity,
+      entity_score: entity_score,
+      sentiment: sentiment,
+      sentiment_score: sentiment_score
+    )
+    name = post[1]
   else
     Comment.create!(
       post_id: name,
