@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_28_072439) do
+ActiveRecord::Schema.define(version: 2019_04_28_084644) do
+
+  create_table "coments", force: :cascade do |t|
+    t.string "texto"
+    t.integer "favs"
+    t.string "sentiment"
+    t.integer "sentiment_score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "texto"
+    t.integer "favs"
+    t.string "sentiment"
+    t.integer "sentiment_score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.text "texto"
