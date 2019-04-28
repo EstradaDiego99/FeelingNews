@@ -60,35 +60,46 @@ posts_vanilla.each do |post|
   keywords = response["keywords"]
   entities = response["entities"]
 
-  begin
-    sentiment = natural_language_understanding.analyze(
-      text: text,
-      features: {
-        sentiment: {targets: [concept["text"]]}
-      },
-      language: "es"
-    ).result["sentiment"]["targets"].first
-  rescue
-    sentiment = nil
-  end
-
   keywords.each do |keyword|
     entities.each do |entity|
-      Post.create!(
-        texto: text,
-        favs: post[3],
-        hashtags: nil,
-        shares: nil,
-        tags: nil,
-        concept: concept,
-        concept_score: concept_score,
-        keyword: keyword["text"],
-        keyword_score: keyword["relevance"],
-        category: category,
-        category_score: category_score,
-        entity: entity["text"],
-        entity_score: entity["relevance"]
-      )
+      if post[6]=="si"
+        parent = Post.find(params[:text])
+        begin
+          sentiment = natural_language_understanding.analyze(
+            text: text,
+            features: {
+              sentiment: {targets: [parent.concept]}
+            },
+            language: "es"
+          ).result["sentiment"]["targets"].first
+          puts sentiment
+        rescue
+          sentiment = nil
+        end
+        Comment.create!(
+          post_id: parent.id,
+          texto: text,
+          favs: post[3],
+          sentiment: sentiment["label"],
+          sentiment_score: sentiment["score"]
+        )
+      else
+        Post.create!(
+          texto: text,
+          favs: post[3],
+          hashtags: nil,
+          shares: nil,
+          tags: nil,
+          concept: concept,
+          concept_score: concept_score,
+          keyword: keyword["text"],
+          keyword_score: keyword["relevance"],
+          category: category,
+          category_score: category_score,
+          entity: entity["text"],
+          entity_score: entity["relevance"]
+        )
+      end
     end
   end
 
