@@ -26,7 +26,7 @@ language_translator = IBMWatson::LanguageTranslatorV3.new(
 route = File.join(Rails.root, 'public', 'files', 'tweets.csv')
 posts_vanilla = CSV.read(route, encoding: "ISO-8859-1:UTF-8")
 
-Posts.delete_all
+# Posts.delete_all
 
 posts_vanilla.each do |post|
 
@@ -65,7 +65,7 @@ posts_vanilla.each do |post|
   keywords.each do |keyword|
     entities.each do |entity|
       if post[6]=="no"
-        Post.create!(
+        parent = Post.create!(
           texto: text,
           favs: post[3],
           hashtags: nil,
@@ -80,36 +80,30 @@ posts_vanilla.each do |post|
           entity: entity["text"],
           entity_score: entity["relevance"]
         )
+      else
+        begin
+          sentiment = natural_language_understanding.analyze(
+            text: text,
+            features: {
+              sentiment: {targets: [parent.concept]}
+            },
+            language: "es"
+          ).result["sentiment"]["targets"].first
+          puts sentiment
+          sentiment = sentiment["label"]
+          sentiment_score = sentiment["score"]
+        rescue
+          sentiment = nil
+          sentiment_score = nil
+        end
+        Comment.create!(
+          texto: text,
+          favs: post[3],
+          sentiment: sentiment,
+          sentiment_score: sentiment_score
+        )
       end
     end
   end
-
-end
-
-posts_vanilla.each do |post|
-
-  next if post[6]=="si"
-
-  text = post[7]
-
-  begin
-    sentiment = natural_language_understanding.analyze(
-      text: text,
-      features: {
-        sentiment: {targets: [parent.concept]}
-      },
-      language: "es"
-    ).result["sentiment"]["targets"].first
-    puts sentiment
-  rescue
-    sentiment = nil
-  end
-
-  Comment.create!(
-    texto: text,
-    favs: post[3],
-    sentiment: sentiment["label"],
-    sentiment_score: sentiment["score"]
-  )
 
 end
