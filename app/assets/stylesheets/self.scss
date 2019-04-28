@@ -25,7 +25,14 @@ h1{
     text-align: center;
 }
 
-a button{
+main#ButonMain{
+    max-width: 85%;
+    margin: 0 auto;
+    position: sticky;
+    top: 0px;
+}
+
+main#ButonMain a button{
     display: inline-block;
     text-align: center;
     color: white;
