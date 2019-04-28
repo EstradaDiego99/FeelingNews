@@ -1,24 +1,52 @@
-<h1>Self#show</h1>
-<p>Find me in app/views/self/show.html.erb</p>
+# <h1>Self#show</h1>
+# <p>Find me in app/views/self/show.html.erb</p>
 
 
 <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.texto %></td>
-      <td><%= post.favs %></td>
-      <td><%= post.hashtags %></td>
-      <td><%= post.shares %></td>
-      <td><%= post.tags %></td>
-      <td><%= post.concept %></td>
-      <td><%= post.concept_score %></td>
-      <td><%= post.keyword %></td>
-      <td><%= post.keyword_score %></td>
-      <td><%= post.category %></td>
-      <td><%= post.category_score %></td>
-      <td><%= post.entity %></td>
-      <td><%= post.entity_score %></td>
-      <td><%= link_to 'Show', post %></td>
-      <td><%= link_to 'Edit', edit_post_path(post) %></td>
-      <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+
+    <section id="showSection">   
+        <div class="row">
+            <%= post.texto %>
+        </div>  
+        <div class="row">
+            <%= post.favs %>
+        </div>
+        <div class="row">
+            <%= post.hashtags %>
+        </div>
+        <div class="row">
+            <%= post.shares %>
+        </div>
+        <div class="row">
+            <%= post.tags %>
+        </div>
+        <div class="row">
+            <%= post.concept %>
+        </div>
+        <div class="row">
+            <%= post.concept_score %>
+        </div>
+        <div class="row">
+            <%= post.keyword %>
+        </div>
+        <div class="row">
+            <%= post.keyword_score %>
+        </div>
+        <div class="row">
+            <%= post.category %>
+        </div>     
+        <div class="row">
+            <%= post.category_score %>
+        </div>                           
+        <div class="row">
+            <%= post.entity %>
+        </div>
+        <div class="row">
+            <%= post.entity_score %>
+        </div>
+        <div class="row">
+            <%= link_to 'Show', post %>
+        </div>                            
+    </section>
+
   <% end %>
